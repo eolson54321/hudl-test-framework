@@ -11,17 +11,16 @@ Scratch notes for different cases
 5. Super long input
 6. Case sensitivity
 7. Leading/trailing whitespace
-8. Copy/pastes (Can i paste invalid values into textbox?)
 
 
 ## First Page (Email only prompt)
 
 ### Email field
 
-1. Invalid email: Show error
-2. Valid & Unregistered email: Taken to next page
-3. Valid & Registered email: Taken to next page
-4. No email entered: Show error
+1. ✅Invalid email: Show error
+2. ✅Valid & Unregistered email: Taken to next page
+3. ✅Valid & Registered email: Taken to next page
+4. ✅No email entered: Show error
 5. Continue button vs pressing enter
 
 
