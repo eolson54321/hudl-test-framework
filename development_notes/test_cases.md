@@ -4,13 +4,13 @@ Scratch notes for different cases
 
 ## General text boxes
 
-1. Code injection? (SQL, HTML `<script>`, TS, etc)
-2. Special characters
-3. No value entered
-4. Invalid format
-5. Super long input
-6. Case sensitivity
-7. Leading/trailing whitespace
+1. ✅Code injection? (SQL, HTML `<script>`, TS, etc)
+2. ✅Special characters
+3. ✅No value entered
+4. ✅Invalid format
+5. ✅Super long input
+6. ✅Case sensitivity
+7. ✅Leading/trailing whitespace
 
 
 ## First Page (Email only prompt)
@@ -24,19 +24,14 @@ Scratch notes for different cases
 5. Continue button vs pressing enter
 
 
-### Create Account
-
-1. Verify link works
-
-
 ### Other Login Options
 
-1. Verify buttons work
+1. ✅Verify buttons work
 
 
 ### Footer
 
-1. Verify links work
+1. ✅Verify links work
 
 
 ## Second Page (Email and Password option)
