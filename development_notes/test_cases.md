@@ -43,14 +43,25 @@ Scratch notes for different cases
 3. ✅Invalid password: do nothing
 4. ✅Password hidden by default
 5. ✅Show password button reveals/hides password
-6. Forgot password: verify link is valid
+6. ✅Forgot password: verify link is valid
 7. Continue button vs pressing enter
-8. Create account button: verify link is valid
+8. ✅Create account button: verify link is valid
 
 
 ### Footer
 
-1. Verify links work
+1. ✅Verify links work
+
+## Logout
+
+1. Basic logout: Redirects
+2. Session termination: back button does not gain access
+3. Manual entry of URL: should not work
+4. Verify local storage/cookies are cleared
+5. Multitab login/logout: Logout of one tab should invalidate the other
+6. Logout on all devices option?
+7. Token replay after logout?
+8. Natural session expires?
 
 
 ## Hotkeys
