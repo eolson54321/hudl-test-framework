@@ -93,4 +93,78 @@ test.describe('Password Page Tests', () => {
         
         await expect(page).toHaveURL(/\/home/);
     });
+
+    test('prevent code injection (XSS/SQLi)', async ({ page }) => {
+        await enterEmail(page, process.env.LOGIN_EMAIL);
+        const form = page.locator('form').filter({ hasText: 'password' });
+        const passwordInput = form.getByRole('textbox', { name: 'Password' });
+        
+        const injectionStrings = [
+            "<script>alert('xss')</script>",  // HTML/JS
+            "password' OR '1'='1",            // SQL Injection
+            "${process.env.LOGIN_PASSWORD}"   // Template Literal/TS
+        ];
+
+        // Enter each string into email field
+        for (const payload of injectionStrings) {
+            await passwordInput.fill(payload);
+            await form.getByRole('button', { name: 'Continue' }).click();
+            await expect(form).toContainText('Your email or password is incorrect. Try again.');
+        }
+    });
+
+    test('special characters handling', async ({ page }) => {
+        await enterEmail(page, dummyEmail);
+        const form = page.locator('form').filter({ hasText: 'password' });
+        const passwordInput = form.getByRole('textbox', { name: 'Password' });
+
+        const invalidFormats = [
+            '!#$%^&*()',
+            '😁',
+            '𝐍𝐚𝐦𝐞',
+            '\t',
+            '𖦹',
+        ];
+
+        // Enter each format
+        for (const invalid of invalidFormats) {
+            await passwordInput.fill(invalid);
+            await form.getByRole('button', { name: 'Continue' }).click();
+            await expect(form).toContainText('Incorrect username or password.');
+        }
+    });
+
+    test('long input string', async ({ page }) => {
+        await enterEmail(page, dummyEmail);
+        const form = page.locator('form').filter({ hasText: 'password' });
+        const passwordInput = form.getByRole('textbox', { name: 'Password' });
+
+        const longPassword = 'a'.repeat(10_000);
+        await passwordInput.fill(longPassword);
+        await form.getByRole('button', { name: 'Continue' }).click();
+        await expect(form).toContainText('Incorrect username or password.');
+    });
+
+    test('password case insensitivity', async ({ page }) => {
+        await enterEmail(page, process.env.LOGIN_EMAIL);
+        const form = page.locator('form').filter({ hasText: 'password' });
+        const passwordInput = form.getByRole('textbox', { name: 'Password' });
+
+        const password = process.env.LOGIN_PASSWORD.toUpperCase();
+        await passwordInput.fill(password);
+        await form.getByRole('button', { name: 'Continue' }).click();
+        await expect(form).toContainText('Your email or password is incorrect. Try again.');
+    });
+
+    test('no trim of leading and trailing whitespace', async ({ page }) => {
+        await enterEmail(page, process.env.LOGIN_EMAIL);
+        const form = page.locator('form').filter({ hasText: 'password' });
+        const passwordInput = form.getByRole('textbox', { name: 'Password' });
+    
+        const email = `  ${process.env.LOGIN_PASSWORD}   `;
+        await passwordInput.fill(email);
+        await form.getByRole('button', { name: 'Continue' }).click();
+
+        await expect(form).toContainText('Your email or password is incorrect. Try again.');
+    });
 });

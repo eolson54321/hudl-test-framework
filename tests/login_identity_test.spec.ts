@@ -76,7 +76,7 @@ test('prevent code injection (XSS/SQLi)', async ({ page }) => {
     const injectionStrings = [
         "<script>alert('xss')</script>",  // HTML/JS
         "email@example.com' OR '1'='1",   // SQL Injection
-        "${process.env.LOGIN_PASSWORD}"   // Template Literal/TS
+        "${process.env.LOGIN_EMAIL}"      // Template Literal/TS
     ];
 
     // Enter each string into email field
