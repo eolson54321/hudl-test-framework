@@ -38,11 +38,11 @@ Scratch notes for different cases
 
 ### Fields
 
-1. Edit email: Redirect to first page
-2. No password entered: error
-3. Invalid password: do nothing
-4. Password hidden by default
-5. Show password button reveals/hides password
+1. ✅Edit email: Redirect to first page
+2. ✅No password entered: error
+3. ✅Invalid password: do nothing
+4. ✅Password hidden by default
+5. ✅Show password button reveals/hides password
 6. Forgot password: verify link is valid
 7. Continue button vs pressing enter
 8. Create account button: verify link is valid
