@@ -54,20 +54,11 @@ Scratch notes for different cases
 
 ## Logout
 
-1. Basic logout: Redirects
-2. Session termination: back button does not gain access
-3. Manual entry of URL: should not work
-4. Verify local storage/cookies are cleared
-5. Multitab login/logout: Logout of one tab should invalidate the other
-6. Logout on all devices option?
-7. Token replay after logout?
-8. Natural session expires?
-
-
-## Hotkeys
-
-1. Tab to switch between fields
-2. Enter to submit form items
+1. ✅Basic logout: Redirects
+2. ✅Session termination: back button does not gain access
+3. ✅Manual entry of URL: should not work
+4. ✅Verify local storage/cookies are cleared
+5. ✅Multitab login/logout: Logout of one tab should invalidate the other
 
 
 ## Other Possible Cases
