@@ -102,6 +102,9 @@ There are many missing aspects of this test suite. The following highlights a fe
     4. Multi-device login
     5. Hotkeys (e.g., `tab`, `enter`, etc)
 
+4. Currently, the GitHub workflow attempts to run all tests. Some tests require the `.env` file, which GitHub does not have, resulting in failing tests. 
+
+
 ## Other
 
 - `ESLint` can be used to lint the project with `npx eslint tests`.
