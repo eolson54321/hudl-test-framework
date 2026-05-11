@@ -23,9 +23,9 @@ This project aims to create a framework for end-to-end tests of the Hudl login p
 
     1. You will first need to create the `.env` file. This can be done from the example with the following command:
 
-    ```bash
-    cp .env.example .env
-    ```
+        ```bash
+        cp .env.example .env
+        ```
 
     2. Afterwards, open the new `.env` file and replace the placeholder username and password with valid login credentials.
 
@@ -39,21 +39,21 @@ These tests verify different components of the Hudl login page. This is done by 
 
     - You can run the login `identity` page tests with the following command. These tests don't login so rate limiting isn't an issue.
 
-    ```bash
-    npx playwright test tests/login_identity_test.spec.ts
-    ```
+        ```bash
+        npx playwright test tests/login_identity_test.spec.ts
+        ```
 
     - You can run the login `password` page tests with the following command. These tests are slowed down in an attempt to avoid too many login attempts at once.
 
-    ```bash
-    npx playwright test tests/login_password_test.spec.ts --workers 1
-    ```
+        ```bash
+        npx playwright test tests/login_password_test.spec.ts --workers 1
+        ```
 
     - You can run the `logout` tests with the following command. These tests login, but typically don't cause any type of rate limiting as all logins are valid.
 
-    ```bash
-    npx playwright test tests/logout_test.spec.ts
-    ```
+        ```bash
+        npx playwright test tests/logout_test.spec.ts
+        ```
 
 2. **Using Playwright's UI mode**: Playwright's UI mode can be used to have easier control of which tests run when. This is another easy way of ensuring this rate limiting doesn't occur and cause tests to fail. Run all tests with the following command:
 
@@ -83,4 +83,4 @@ There are many missing aspects of this test suite in order to make it fully test
 
 1. End-to-end tests of the login page send multiple login attempts. This commonly results in a `"You’ve tried to log in too many times, so we’ve temporarily blocked your account. To get help, contact support."` message and the tests fail. Current work arounds run these tests slower, which is not ideal for scalability or a production environment. Running these tests in a development environment with no rate limiting or moving some tests to be unit tests instead would likely solve this problem. 
 
-2. These tests strictly check the functionality of the `identity` and `password` pages and logging out. There is plenty of room for building upon this to add tests for account creation, password resets, or other aspects of the Hudl platform. This can be done by either modifying the existing test files within the `tests/` folder, or creating a new test file here.
+2. These tests strictly check the functionality of the `identity` and `password` pages and logging out. There is plenty of room for building upon this to add tests for account creation, password resets, or other aspects of the Hudl platform. This can be done by either modifying the existing test files within the `tests/` folder, or creating a new test file.
