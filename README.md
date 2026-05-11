@@ -1,6 +1,6 @@
 # Login Test Framework
 
-This project aims to create a framework for end-to-end tests of the Hudl login page. `Node.js` is required for this project, `v20.5.1` was used during development.
+This project aims to create a framework for end-to-end tests of the Hudl login page. `Node.js` is required for this project, `v24.15.0` was used during development.
 
 ## Setup
 
@@ -64,7 +64,7 @@ These tests verify different components of the Hudl login page. This is done by 
     npx playwright test --ui
     ```
 
-    The left sidebar shows all the test suites which can be run. You can run each of the test suites using the green play button which appears after hovering over the desired test or test suite. A green checkmark with the `Passed` text should appear in the center column if all tests pass.
+    The left sidebar shows all the test suites which can be run. You can run each of the test suites using the green play button which appears after hovering over the desired test or test suite. A green checkmark with the `Passed` text should appear in the center column if all tests pass. Rerunning tests which have failed due to rate limiting should give them another change to pass.
 
 ## Important Files
 
@@ -90,4 +90,14 @@ There are many missing aspects of this test suite. The following highlights a fe
 
 2. The logout tests require logging in before each test. Instead, this could be rewritten to capture the authentication cookies and use these instead. This would reduce the number of login attempts needed to run the tests and would likely speed these ones up. 
 
-3. These tests strictly check the functionality of the `identity` and `password` pages and logging out. There is plenty of room for building upon this to add tests for account creation, password resets, or other aspects of the Hudl platform. This can be done by either modifying the existing test files within the `tests/` folder, or creating a new test file.
+3. These tests strictly check the functionality of the `identity` and `password` pages and logging out. There is plenty of room for building upon this to add tests for account creation, password resets, or other aspects of the Hudl platform. This can be done by either modifying the existing test files within the `tests/` folder, or creating a new test file. Possible things to test:
+
+    1. Logging in by directly calling the API
+    2. Changing the state in the URL
+    3. More direct testing of rate limiting
+    4. Multi-device login
+    5. Hotkeys (e.g., `tab`, `enter`, etc)
+
+## Other
+
+- `ESLint` can be used to lint the project with `npx eslint tests`.

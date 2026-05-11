@@ -21,7 +21,6 @@ Scratch notes for different cases
 2. ✅Valid & Unregistered email: Taken to next page
 3. ✅Valid & Registered email: Taken to next page
 4. ✅No email entered: Show error
-5. Continue button vs pressing enter
 
 
 ### Other Login Options
@@ -44,8 +43,7 @@ Scratch notes for different cases
 4. ✅Password hidden by default
 5. ✅Show password button reveals/hides password
 6. ✅Forgot password: verify link is valid
-7. Continue button vs pressing enter
-8. ✅Create account button: verify link is valid
+7. ✅Create account button: verify link is valid
 
 
 ### Footer
@@ -59,18 +57,3 @@ Scratch notes for different cases
 3. ✅Manual entry of URL: should not work
 4. ✅Verify local storage/cookies are cleared
 5. ✅Multitab login/logout: Logout of one tab should invalidate the other
-
-
-## Other Possible Cases
-
-1. Attempt login with direct API call
-2. Mess with state in URL
-3. Rate limiting? Can i keep trying login attempts?
-4. Unexpected things in HTML?
-5. Unexpected console errors/logs?
-6. User stays logged in after closing/reopening browser
-7. Session timeout?
-8. Cookie/Local storage?
-9. Concurrent login? Multiple device login?
-10. Different screen sizes
-11. Errors don't leak data
