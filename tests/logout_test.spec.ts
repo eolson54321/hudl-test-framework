@@ -31,7 +31,7 @@ async function logout(page: Page) {
     await logoutButton.click();
 }
 
-test.describe('Logout tests', () => {
+test.describe('Logout Tests', () => {
 
     test.beforeEach(async ({ page }) => {
         await login(page);

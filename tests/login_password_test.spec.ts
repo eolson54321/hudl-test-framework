@@ -2,7 +2,7 @@ import { test, expect, Page } from '@playwright/test';
 
 const loginPage = 'https://www.hudl.com/login'
 
-const dummyEmail = 'abc@domain.com'
+const dummyEmail = 'abc123@domain.com'
 
 async function enterEmail(page: Page, email: string): Promise<void> {
     await page.goto(loginPage);
@@ -16,43 +16,7 @@ async function enterEmail(page: Page, email: string): Promise<void> {
 }
 
 
-test.describe('Password Page Tests', () => {
-
-    test('edit email', async ({ page }) => {
-        await enterEmail(page, dummyEmail);
-        const editButton = page.locator('[data-qa-id="edit-identifier"]');
-
-        await editButton.click();
-
-        // Verify redirect
-        await expect(page).toHaveURL(/\/login/);
-        
-        // Verify email field is empty
-        const emailInput = page.locator('[data-qa-id="email-input-input"]');
-        await expect(emailInput).toBeEmpty();
-    });
-
-    test('password hidden by default', async ({ page }) => {
-        await enterEmail(page, dummyEmail);
-        const passwordInput = page.locator('[data-qa-id="password-input-input"]');
-
-        // "password" type masks the characters
-        await expect(passwordInput).toHaveAttribute('type', 'password');
-    });
-
-    test('show password button reveals/hides password', async ({ page }) => {
-        await enterEmail(page, dummyEmail);
-        const passwordInput = page.locator('[data-qa-id="password-input-input"]');
-        const toggleButton = page.locator('[data-qa-id="toggle-password-visibility"]');
-
-        // Click to show
-        await toggleButton.click();
-        await expect(passwordInput).toHaveAttribute('type', 'text');
-
-        // Click to hide
-        await toggleButton.click();
-        await expect(passwordInput).toHaveAttribute('type', 'password');
-    });
+test.describe('Password Entry Tests', () => {
 
     test('empty password field', async ({ page }) => {
         await enterEmail(page, dummyEmail);
@@ -61,18 +25,6 @@ test.describe('Password Page Tests', () => {
         
         await continueButton.click();
 
-        await expect(helpText).toContainText('Please enter your password');
-    });
-
-    test('space password', async ({ page }) => {
-        await enterEmail(page, dummyEmail);
-        const continueButton = page.locator('button[type="submit"]');
-        const passwordInput = page.locator('[data-qa-id="password-input-input"]');
-        const helpText = page.locator('[data-qa-id="password-input-help-text"]')
-
-        await passwordInput.fill(' ');
-        await continueButton.click()
-        
         await expect(helpText).toContainText('Please enter your password');
     });
 
@@ -109,6 +61,18 @@ test.describe('Password Page Tests', () => {
         await continueButton.click()
         
         await expect(page).toHaveURL(/\/home/);
+    });
+
+    test('space password', async ({ page }) => {
+        await enterEmail(page, dummyEmail);
+        const continueButton = page.locator('button[type="submit"]');
+        const passwordInput = page.locator('[data-qa-id="password-input-input"]');
+        const helpText = page.locator('[data-qa-id="password-input-help-text"]')
+
+        await passwordInput.fill(' ');
+        await continueButton.click()
+        
+        await expect(helpText).toContainText('Please enter your password');
     });
 
     test('prevent code injection (XSS/SQLi)', async ({ page }) => {
@@ -191,7 +155,43 @@ test.describe('Password Page Tests', () => {
     });
 });
 
-test.describe('External Link Functionality', () => {
+test.describe('Password Page UI Tests', () => {
+
+    test('edit email', async ({ page }) => {
+        await enterEmail(page, dummyEmail);
+        const editButton = page.locator('[data-qa-id="edit-identifier"]');
+
+        await editButton.click();
+
+        // Verify redirect
+        await expect(page).toHaveURL(/\/login/);
+        
+        // Verify email field is empty
+        const emailInput = page.locator('[data-qa-id="email-input-input"]');
+        await expect(emailInput).toBeEmpty();
+    });
+
+    test('password hidden by default', async ({ page }) => {
+        await enterEmail(page, dummyEmail);
+        const passwordInput = page.locator('[data-qa-id="password-input-input"]');
+
+        // "password" type masks the characters
+        await expect(passwordInput).toHaveAttribute('type', 'password');
+    });
+
+    test('show password button reveals/hides password', async ({ page }) => {
+        await enterEmail(page, dummyEmail);
+        const passwordInput = page.locator('[data-qa-id="password-input-input"]');
+        const toggleButton = page.locator('[data-qa-id="toggle-password-visibility"]');
+
+        // Click to show
+        await toggleButton.click();
+        await expect(passwordInput).toHaveAttribute('type', 'text');
+
+        // Click to hide
+        await toggleButton.click();
+        await expect(passwordInput).toHaveAttribute('type', 'password');
+    });
 
     test('all hiperlinks navigate to correct pages', async ({ page }) => {
         const hyperlinks = [

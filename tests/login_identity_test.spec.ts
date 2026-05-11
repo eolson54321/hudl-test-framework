@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 const loginPage = 'https://www.hudl.com/login'
 
-const dummyEmail = 'abc@domain.com'
+const dummyEmail = 'abc123@domain.com'
 
 test.describe('Email Field Functionality', () => {
 
