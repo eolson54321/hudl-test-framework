@@ -6,7 +6,7 @@ async function login(page: Page): Promise<void> {
     await page.goto(loginPage);
 
     // Identity page
-    const emailInput = page.locator('[data-qa-id="email-input-input"]')
+    const emailInput = page.locator('[data-qa-id="email-input-input"]');
     const continueButton = page.locator('button[type="submit"]');
 
     await emailInput.fill(process.env.LOGIN_EMAIL);

@@ -9,7 +9,7 @@ test.describe('Email Field Functionality', () => {
     test('empty email field', async ({ page }) => {
         await page.goto(loginPage);
         const continueButton = page.locator('button[type="submit"]');
-        const helpText = page.locator('[data-qa-id="email-input-help-text"]')
+        const helpText = page.locator('[data-qa-id="email-input-help-text"]');
 
         // Press "Continue" button
         await continueButton.click();
@@ -20,7 +20,7 @@ test.describe('Email Field Functionality', () => {
     test('unregistered email', async ({ page }) => {
         await page.goto(loginPage);
         const continueButton = page.locator('button[type="submit"]');
-        const emailInput = page.locator('[data-qa-id="email-input-input"]')
+        const emailInput = page.locator('[data-qa-id="email-input-input"]');
 
         // Enter unregistered email
         await emailInput.fill(dummyEmail);
@@ -32,7 +32,7 @@ test.describe('Email Field Functionality', () => {
     test('registered email', async ({ page }) => {
         await page.goto(loginPage);
         const continueButton = page.locator('button[type="submit"]');
-        const emailInput = page.locator('[data-qa-id="email-input-input"]')
+        const emailInput = page.locator('[data-qa-id="email-input-input"]');
         
         // Enter valid email
         await emailInput.fill(process.env.LOGIN_EMAIL);
@@ -85,8 +85,8 @@ test.describe('Email Field Functionality', () => {
     test('special characters handling', async ({ page }) => {
         await page.goto(loginPage);
         const continueButton = page.locator('button[type="submit"]');
-        const emailInput = page.locator('[data-qa-id="email-input-input"]')
-        const helpText = page.locator('[data-qa-id="email-input-help-text"]')
+        const emailInput = page.locator('[data-qa-id="email-input-input"]');
+        const helpText = page.locator('[data-qa-id="email-input-help-text"]');
 
         const invalidFormats = [
             '!#$%^&*()@domain.com',
@@ -107,8 +107,8 @@ test.describe('Email Field Functionality', () => {
     test('long input string', async ({ page }) => {
         await page.goto(loginPage);
         const continueButton = page.locator('button[type="submit"]');
-        const emailInput = page.locator('[data-qa-id="email-input-input"]')
-        const helpText = page.locator('[data-qa-id="email-input-help-text"]')
+        const emailInput = page.locator('[data-qa-id="email-input-input"]');
+        const helpText = page.locator('[data-qa-id="email-input-help-text"]');
 
         const longEmail = 'a'.repeat(10_000) + '@example.com';
 
@@ -120,7 +120,7 @@ test.describe('Email Field Functionality', () => {
     test('email case insensitivity', async ({ page }) => {
         await page.goto(loginPage);
         const continueButton = page.locator('button[type="submit"]');
-        const emailInput = page.locator('[data-qa-id="email-input-input"]')
+        const emailInput = page.locator('[data-qa-id="email-input-input"]');
 
         const email = process.env.LOGIN_EMAIL.toUpperCase();
         await emailInput.fill(email);
@@ -131,7 +131,7 @@ test.describe('Email Field Functionality', () => {
     test('trim leading and trailing whitespace', async ({ page }) => {
         await page.goto(loginPage);
         const continueButton = page.locator('button[type="submit"]');
-        const emailInput = page.locator('[data-qa-id="email-input-input"]')
+        const emailInput = page.locator('[data-qa-id="email-input-input"]');
 
         const email = `  ${dummyEmail}   `;
         await emailInput.fill(email);

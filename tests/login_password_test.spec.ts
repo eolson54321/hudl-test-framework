@@ -6,7 +6,7 @@ const dummyEmail = 'abc123@domain.com'
 
 async function enterEmail(page: Page, email: string): Promise<void> {
     await page.goto(loginPage);
-    const emailInput = page.locator('[data-qa-id="email-input-input"]')
+    const emailInput = page.locator('[data-qa-id="email-input-input"]');
     const continueButton = page.locator('button[type="submit"]');
 
     await emailInput.fill(email);
@@ -21,7 +21,7 @@ test.describe('Password Entry Tests', () => {
     test('empty password field', async ({ page }) => {
         await enterEmail(page, dummyEmail);
         const continueButton = page.locator('button[type="submit"]');
-        const helpText = page.locator('[data-qa-id="password-input-help-text"]')
+        const helpText = page.locator('[data-qa-id="password-input-help-text"]');
         
         await continueButton.click();
 
@@ -32,10 +32,10 @@ test.describe('Password Entry Tests', () => {
         await enterEmail(page, dummyEmail);
         const continueButton = page.locator('button[type="submit"]');
         const passwordInput = page.locator('[data-qa-id="password-input-input"]');
-        const helpText = page.locator('[data-qa-id="password-input-help-text"]')
+        const helpText = page.locator('[data-qa-id="password-input-help-text"]');
 
         await passwordInput.fill('WrongPassword123');
-        await continueButton.click()
+        await continueButton.click();
         
         await expect(helpText).toContainText('Incorrect username or password.');
     });
@@ -44,10 +44,10 @@ test.describe('Password Entry Tests', () => {
         await enterEmail(page, process.env.LOGIN_EMAIL);
         const continueButton = page.locator('button[type="submit"]');
         const passwordInput = page.locator('[data-qa-id="password-input-input"]');
-        const helpText = page.locator('[data-qa-id="password-input-help-text"]')
+        const helpText = page.locator('[data-qa-id="password-input-help-text"]');
 
         await passwordInput.fill('WrongPassword123');
-        await continueButton.click()
+        await continueButton.click();
         
         await expect(helpText).toContainText('Your email or password is incorrect. Try again.');
     });
@@ -58,7 +58,7 @@ test.describe('Password Entry Tests', () => {
         const passwordInput = page.locator('[data-qa-id="password-input-input"]');
 
         await passwordInput.fill(process.env.LOGIN_PASSWORD);
-        await continueButton.click()
+        await continueButton.click();
         
         await expect(page).toHaveURL(/\/home/);
     });
@@ -67,10 +67,10 @@ test.describe('Password Entry Tests', () => {
         await enterEmail(page, dummyEmail);
         const continueButton = page.locator('button[type="submit"]');
         const passwordInput = page.locator('[data-qa-id="password-input-input"]');
-        const helpText = page.locator('[data-qa-id="password-input-help-text"]')
+        const helpText = page.locator('[data-qa-id="password-input-help-text"]');
 
         await passwordInput.fill(' ');
-        await continueButton.click()
+        await continueButton.click();
         
         await expect(helpText).toContainText('Please enter your password');
     });
@@ -79,7 +79,7 @@ test.describe('Password Entry Tests', () => {
         await enterEmail(page, process.env.LOGIN_EMAIL);
         const continueButton = page.locator('button[type="submit"]');
         const passwordInput = page.locator('[data-qa-id="password-input-input"]');
-        const helpText = page.locator('[data-qa-id="password-input-help-text"]')
+        const helpText = page.locator('[data-qa-id="password-input-help-text"]');
         
         const injectionStrings = [
             "<script>alert('xss')</script>",  // HTML/JS
@@ -99,7 +99,7 @@ test.describe('Password Entry Tests', () => {
         await enterEmail(page, dummyEmail);
         const continueButton = page.locator('button[type="submit"]');
         const passwordInput = page.locator('[data-qa-id="password-input-input"]');
-        const helpText = page.locator('[data-qa-id="password-input-help-text"]')
+        const helpText = page.locator('[data-qa-id="password-input-help-text"]');
 
         const invalidFormats = [
             '!#$%^&*()',
@@ -120,7 +120,7 @@ test.describe('Password Entry Tests', () => {
         await enterEmail(page, dummyEmail);
         const continueButton = page.locator('button[type="submit"]');
         const passwordInput = page.locator('[data-qa-id="password-input-input"]');
-        const helpText = page.locator('[data-qa-id="password-input-help-text"]')
+        const helpText = page.locator('[data-qa-id="password-input-help-text"]');
 
         const longPassword = 'a'.repeat(10_000);
         await passwordInput.fill(longPassword);
@@ -132,7 +132,7 @@ test.describe('Password Entry Tests', () => {
         await enterEmail(page, process.env.LOGIN_EMAIL);
         const continueButton = page.locator('button[type="submit"]');
         const passwordInput = page.locator('[data-qa-id="password-input-input"]');
-        const helpText = page.locator('[data-qa-id="password-input-help-text"]')
+        const helpText = page.locator('[data-qa-id="password-input-help-text"]');
 
         const password = process.env.LOGIN_PASSWORD.toUpperCase();
         await passwordInput.fill(password);
@@ -145,7 +145,7 @@ test.describe('Password Entry Tests', () => {
         await enterEmail(page, process.env.LOGIN_EMAIL);
         const continueButton = page.locator('button[type="submit"]');
         const passwordInput = page.locator('[data-qa-id="password-input-input"]');
-        const helpText = page.locator('[data-qa-id="password-input-help-text"]')
+        const helpText = page.locator('[data-qa-id="password-input-help-text"]');
     
         const email = `  ${process.env.LOGIN_PASSWORD}   `;
         await passwordInput.fill(email);
