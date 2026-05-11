@@ -6,6 +6,9 @@ This project aims to create a framework for end-to-end tests of the Hudl login p
 
 1. Install `Node.js` if necessary.
 2. Download or clone this repository. (Make sure to unzip if downloaded)
+
+    - The repository can be cloned with: `git clone https://github.com/eolson54321/hudl-test-framework.git`
+
 3. Open a new terminal and navigate to the project: `cd /PATH/TO/hudl-test-framework`
 4. Install project dependencies with:
 
@@ -55,7 +58,7 @@ These tests verify different components of the Hudl login page. This is done by 
         npx playwright test tests/logout_test.spec.ts
         ```
 
-2. **Using Playwright's UI mode**: Playwright's UI mode can be used to have easier control of which tests run when. This is another easy way of ensuring this rate limiting doesn't occur and cause tests to fail. Run all tests with the following command:
+2. **Using Playwright's UI mode**: Playwright's UI mode can be used to have easier control of which tests run when. This is another easy way of ensuring this rate limiting doesn't occur and cause tests to fail as tests can be run individually. Run all tests with the following command:
 
     ```bash
     npx playwright test --ui
@@ -70,7 +73,7 @@ This repository contains the foundation for creating future tests of the Hudl pl
 - `tests/`: This folder contains all end-to-end tests.
 
     - `login_identity_test.spec.ts`: Tests for the identity page of Hudl's login flow. These test the `email` field's functionality and hyperlinks found on the page.
-    - `login_password_test.spec.ts`: Tests for the password page of Hudl's login flow. These test the `password` field's functionality, credential validation, and hyperlinks found on the page.
+    - `login_password_test.spec.ts`: Tests for the password page of Hudl's login flow. These test the `password` field's functionality, credential validation, and hyperlinks found on the page. Note that a dummy email address is used (when applicable) for most of these tests so that you don't get locked out of your account.
     - `logout_test.spec.ts`: Tests for the logout functionality of Hudl's login flow. These test different states of logging out.
 
 - `playwright.config.ts`: Defines the config of how Playwright should run the tests.
@@ -79,8 +82,12 @@ This repository contains the foundation for creating future tests of the Hudl pl
 
 ## Future Work
 
-There are many missing aspects of this test suite in order to make it fully test the Hudl login flow. 
+There are many missing aspects of this test suite. The following highlights a few key components for future work. 
 
 1. End-to-end tests of the login page send multiple login attempts. This commonly results in a `"You’ve tried to log in too many times, so we’ve temporarily blocked your account. To get help, contact support."` message and the tests fail. Current work arounds run these tests slower, which is not ideal for scalability or a production environment. Running these tests in a development environment with no rate limiting or moving some tests to be unit tests instead would likely solve this problem. 
 
-2. These tests strictly check the functionality of the `identity` and `password` pages and logging out. There is plenty of room for building upon this to add tests for account creation, password resets, or other aspects of the Hudl platform. This can be done by either modifying the existing test files within the `tests/` folder, or creating a new test file.
+    - Note: I tried randomizing the email address which attempts log ins, but either the IP or session gets blocked, not the specific account trying to log in.
+
+2. The logout tests require logging in before each test. Instead, this could be rewritten to capture the authentication cookies and use these instead. This would reduce the number of login attempts needed to run the tests and would likely speed these ones up. 
+
+3. These tests strictly check the functionality of the `identity` and `password` pages and logging out. There is plenty of room for building upon this to add tests for account creation, password resets, or other aspects of the Hudl platform. This can be done by either modifying the existing test files within the `tests/` folder, or creating a new test file.
