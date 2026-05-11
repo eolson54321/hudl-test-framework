@@ -66,6 +66,10 @@ These tests verify different components of the Hudl login page. This is done by 
 
     The left sidebar shows all the test suites which can be run. You can run each of the test suites using the green play button which appears after hovering over the desired test or test suite. A green checkmark with the `Passed` text should appear in the center column if all tests pass. Rerunning tests which have failed due to rate limiting should give them another change to pass.
 
+> 🛈 **Note**
+> 
+>If you continue to get the max login attempt error, you can try changing the `dummyEmail` within `login_password_test.spec.ts` on line `5` to a different fake email.
+
 ## Important Files
 
 This repository contains the foundation for creating future tests of the Hudl platform. The following files are important in making the existing tests work.
